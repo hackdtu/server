@@ -2,23 +2,36 @@
     <head>
     <title></title>
     </head>
+    <style>
+        .chart{
+            height: 400;
+            width: 400;
+        }
     
-    <body>
+    </style>
+    <body> 
+    <h1>{{severity1}} </h1>
+
+           <div class="chart">
+       
         <canvas id="myChart" height="400" width="400"></canvas> 
-        
+        </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
         
         <script>
+        a = {{  severity1 }}
             const CHART = document.getElementById("myChart");
 console.log(CHART);
 let myChart = new Chart(CHART, {
     type: 'line',
     data: {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: a , 
     datasets: [
         {
             label: "My First dataset",
-            fill: false,
+            fill: true,
+            responsive: false,
+            maintainAspectRatio: true,
             lineTension: 0.1,
             backgroundColor: "rgba(75,192,192,0.4)",
             borderColor: "rgba(75,192,192,1)",
@@ -35,7 +48,7 @@ let myChart = new Chart(CHART, {
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: [65, 59, 80, 81, 56, 55, 40],
+            data: [1000, 59, 80, 81, 56, 55, 40],
             spanGaps: false,
         }
     ]

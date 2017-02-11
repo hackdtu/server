@@ -2,7 +2,7 @@ import requests
 import json
 from django.http import HttpResponse
 from main.models import data , Users 
-from django.shortcuts import redirect
+from django.shortcuts import redirect , render
 
 
 
@@ -90,13 +90,35 @@ def info(request):
 		duration = i.duration
 		severity  = i.severity
 
-		elem = json.dumps({"typeof": typeof, "date":date , "medicine" :medicine , "duration" :duration, "severity" :severity})
+		elem = {"typeof": typeof, "date":date , "medicine" :medicine , "duration" :duration, "severity" :severity}
 		c.append(elem)
 
 
 
-	response_obj = json.dumps(c)
+	response_obj = json.dumps(c , )
 	return HttpResponse(response_obj)	
+def category(request):
+	uid = request.GET.get('uid')
+	a = []
+	v = Users.objects.get(uid  = uid )
+	pk = v.pk
+
+	u = data.objects.values('typeof')
+	print u 
+
+	for i in u :
+		a.append(i.values()[0])
+
+	print a
+	t = list(set(a))
+
+	response_obj = json.dumps(t)
+	return HttpResponse(response_obj)
+	
+
+
+
+
 
 def graph(request):
 	uid = request.GET.get('uid')
@@ -118,3 +140,30 @@ def graph(request):
 
 	response_obj = json.dumps(c)
 	return HttpResponse(response_obj)
+
+
+def chart(request):
+	uid = request.GET.get('uid')
+	disease = request.GET.get('disease')
+	v = Users.objects.get(uid = uid)
+	pk = v.pk
+	data1 = []
+
+	u = data.objects.filter(uid = pk)
+	x = u.filter(typeof = disease)
+	severity1 = []
+	for i in u:
+		typeof = i.typeof
+		date = i.date
+		data1.append(date)
+
+		# duration = i.duration
+		severity  = i.severity
+		severity1.append(severity)
+
+	main = []
+	main.append(severity1)
+	main.append(data1)
+	print severity1
+	# return HttpResponse(main)
+	return render(request, 'main/chart.html', {'severity1': json.dumps(severity1)})
