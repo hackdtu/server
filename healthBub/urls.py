@@ -11,9 +11,11 @@ urlpatterns = patterns('',
     url(r'^doctor$', 'main.views.doc', name='doctor'),
     url(r'^government$', 'main.views.govt', name='governemnt'),
     url(r'^info$', 'main.views.info', name='info'),
-    url(r'^graph$', 'main.views.graph', name='graph'),
+    # url(r'^graph$', 'main.views.graph', name='graph'),
     url(r'^chart$', 'main.views.chart', name='graph'),
     url(r'^category$', 'main.views.category', name='category'),
+
+    url(r'^linechart$', 'main.views.linechart', name='linechart'),
 
 
 )
