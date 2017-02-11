@@ -1,1 +1,1 @@
-web: gunicorn linkedin.wsgi
+web: gunicorn healthBub.wsgi
