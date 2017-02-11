@@ -11,5 +11,6 @@ urlpatterns = patterns('',
     url(r'^doctor$', 'main.views.doc', name='doctor'),
     url(r'^government$', 'main.views.govt', name='governemnt'),
     url(r'^info$', 'main.views.info', name='info'),
+    url(r'^graph$', 'main.views.graph', name='graph'),
 
 )

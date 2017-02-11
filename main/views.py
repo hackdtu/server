@@ -97,3 +97,24 @@ def info(request):
 
 	response_obj = json.dumps(c)
 	return HttpResponse(response_obj)	
+
+def graph(request):
+	uid = request.GET.get('uid')
+	disease = request.GET.get('disease')
+	v = Users.objects.get(uid = uid)
+	pk = v.pk
+
+	u = data.objects.filter(typeof = disease)
+	c = []
+	for i in u:
+		date = i.date
+		duration = i.duration
+		severity  = i.severity
+
+		elem = json.dumps({"date":date,"duration" :duration, "severity" :severity})
+		c.append(elem)
+
+
+
+	response_obj = json.dumps(c)
+	return HttpResponse(response_obj)
