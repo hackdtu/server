@@ -61,13 +61,13 @@ def govt(request):
 		severity  = i.severity
 		review = i.review
 
-		elem = json.dumps({"typeof": typeof, "date":date , "medicine" :medicine , "duration" :duration, "severity" :severity, "review" :review})
+		elem = json.dumps({"typeof": typeof, "date":date , "medicine" :medicine , "duration" :duration, "severity" :severity, "review" :review} , indent = 4 )
 		c.append(elem)
 
 
 
-	response_obj = json.dumps(c)
-	return HttpResponse(response_obj)	
+	# response_obj = json.dumps(c ,indent = 4)
+	return HttpResponse(c , content_type = "application/json" )	
 
 	# u.review = q['review'] 
 
